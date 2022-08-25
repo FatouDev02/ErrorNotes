@@ -15,10 +15,15 @@ public class Probleme {
     private String description;
     private String technologie;
     private String methodologie;
-    private String etats;
+    private String etat;
 
-    @ManyToMany
-    List<Solution> solutions;
 
+    @ManyToOne
+    //@JoinColumn(name = "solution_id_solution")
+    private Solution solution;
+
+    @ManyToOne
+    //@JoinColumn(name = "user_id_user")
+    private User user;
 
 }

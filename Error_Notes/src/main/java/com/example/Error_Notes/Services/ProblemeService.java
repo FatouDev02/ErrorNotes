@@ -9,4 +9,5 @@ public interface ProblemeService {
     Probleme creer(Probleme probleme);
     Probleme modifier(Probleme probleme, Long id_probleme);
     String supprimer(Long id_probleme);
+    Probleme RechercheP(Probleme probleme);
 }

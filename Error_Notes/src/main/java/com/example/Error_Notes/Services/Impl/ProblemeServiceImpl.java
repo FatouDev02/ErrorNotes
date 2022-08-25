@@ -5,8 +5,10 @@ import com.example.Error_Notes.Services.ProblemeService;
 import com.example.Error_Notes.models.Probleme;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Data
+@Service
 public class ProblemeServiceImpl implements ProblemeService {
     @Autowired
     ProblemeRepository problemeRepository;
@@ -23,13 +25,19 @@ public class ProblemeServiceImpl implements ProblemeService {
                     p.setDescription(probleme.getDescription());
                     p.setTechnologie(probleme.getTechnologie());
                     p.setMethodologie(probleme.getMethodologie());
-                    p.setEtats(probleme.getEtats());
+                    p.setEtat(probleme.getEtat());
                     return problemeRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Ce Probleme n'existe pas !"));
     }
 
     @Override
     public String supprimer(Long id_probleme) {
+        problemeRepository.deleteById(id_probleme);
+        return "Suppression effectuée avec succés";
+    }
+
+    @Override
+    public Probleme RechercheP(Probleme probleme) {
         return null;
     }
 }
