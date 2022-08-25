@@ -19,4 +19,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<Probleme> problemes;
+
+    @OneToMany(mappedBy = "user")
+    List<Commentaire> commentaires;
 }

@@ -18,7 +18,7 @@ public class Probleme {
     private String etat;
 
 
-    @ManyToOne
+    @OneToOne
     //@JoinColumn(name = "solution_id_solution")
     private Solution solution;
 

@@ -15,6 +15,9 @@ public class Solution {
     private String temps;
     private String ressource;
 
+    @OneToOne
+    private Probleme problemes;
+
     @OneToMany(mappedBy = "solution")
-    List<Probleme> problemes;
+    List<Commentaire> commentaires;
 }
