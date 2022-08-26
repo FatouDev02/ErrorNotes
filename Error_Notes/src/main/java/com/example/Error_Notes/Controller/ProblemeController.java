@@ -24,6 +24,11 @@ public class ProblemeController {
         return problemeService.modifier(probleme, id_probleme);
     }
 
+    @GetMapping("/search/{mot_cle}")
+    Probleme s(@RequestBody Probleme probleme,@PathVariable String motcle){
+        return problemeService.RechercheP(probleme,motcle);
+    }
+
     @DeleteMapping("/delete/{id_probleme}")
     String delete(@PathVariable Long id_probleme){
         return problemeService.supprimer(id_probleme);

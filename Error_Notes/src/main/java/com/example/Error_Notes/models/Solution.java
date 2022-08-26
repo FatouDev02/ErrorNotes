@@ -20,4 +20,5 @@ public class Solution {
 
     @OneToMany(mappedBy = "solution")
     List<Commentaire> commentaires;
+
 }

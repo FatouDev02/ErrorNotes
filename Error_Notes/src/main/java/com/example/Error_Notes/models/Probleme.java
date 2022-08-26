@@ -15,7 +15,11 @@ public class Probleme {
     private String description;
     private String technologie;
     private String methodologie;
-    private String etat;
+
+    @Enumerated(EnumType.STRING)
+    private Etat etat;
+
+    private String motcle;
 
 
     @OneToOne

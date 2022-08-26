@@ -3,9 +3,12 @@ package com.example.Error_Notes.Services.Impl;
 import com.example.Error_Notes.Repository.ProblemeRepository;
 import com.example.Error_Notes.Services.ProblemeService;
 import com.example.Error_Notes.models.Probleme;
+import com.example.Error_Notes.models.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Data
 @Service
@@ -14,6 +17,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     ProblemeRepository problemeRepository;
     @Override
     public Probleme creer(Probleme probleme) {
+
         return problemeRepository.save(probleme);
     }
 
@@ -33,11 +37,16 @@ public class ProblemeServiceImpl implements ProblemeService {
     @Override
     public String supprimer(Long id_probleme) {
         problemeRepository.deleteById(id_probleme);
-        return "Suppression effectuée avec succés";
+        return "Suppression effectuée avec succès";
     }
 
     @Override
-    public Probleme RechercheP(Probleme probleme) {
-        return null;
+    public Probleme RechercheP(Probleme probleme,String motcle) {
+        Optional<Probleme> problemeOptional=problemeRepository.findByMotcle(motcle);
+        if (problemeOptional.isEmpty()){
+            return null;
+        }
+        return problemeOptional.get();
+
     }
 }
