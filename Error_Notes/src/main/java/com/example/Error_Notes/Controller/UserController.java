@@ -14,30 +14,41 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-/*
-    @GetMapping("/connexion/{email}&{password}")
-    public User connexion(@PathVariable("email") String email, @PathVariable("password") String password){
-        return userService.Seconnecter(email,password);
+
+    @GetMapping("/connexion/{email}/{password}")
+    public String connexion(@PathVariable("email") String email, @PathVariable("password") String password){
+        if(this.userService.Seconnecter(email,password)==null){
+            return "aaa";
+      }
+        this.userService.Seconnecter(email,password);
+        return  "vous etes connectée";
 
     }
-*/
+
+
     @PostMapping("/add")
-    public String add(@RequestBody User user,Long id_user){
-         this.userService.creer(user,id_user);
+    public String add(@RequestBody User user,Long iduser){
+        if( this.userService.creer(user,iduser)==null){
+            return "Cet utilisateur existe deja";
+        }
+         //this.userService.creer(user,iduser);
          return "Utilisateur ajouté";
     }
     @PostMapping("/admin/add")
-    public  String admin(@RequestBody User user,Long id_user){
-        this.userService.createAdmin(user,id_user);
-        return "Admin ajouté";
+    public  String admin(@RequestBody User user,Long iduser){
+        if( this.userService.createAdmin(user,iduser)==null){
+            return "admin existant";
+        }
+        //this.userService.creer(user,iduser);
+        return "existant ajouté";
 
     }
 
 
     @PutMapping("/update/{id_user}")
-    User update(@RequestBody User user, @PathVariable Long id_user){
+    User update(@RequestBody User user, @PathVariable Long iduser){
         //retourner un String
-        return userService.modifier(user, id_user);
+        return userService.modifier(user, iduser);
     }
     //@GetMapping("/")
     String deconnect(){
@@ -57,8 +68,8 @@ public class UserController {
 
 
 //methode pour admin
-    @DeleteMapping("/delete/{id_user}")
-    String delete(Long id_user){
-        return userService.supprimer(id_user);
+    @DeleteMapping("/delete/{iduser}")
+    String delete(Long iduser){
+        return userService.supprimer(iduser);
     }
 }

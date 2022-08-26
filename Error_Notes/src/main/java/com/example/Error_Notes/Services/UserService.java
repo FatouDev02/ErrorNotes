@@ -8,18 +8,19 @@ import java.util.List;
 
 
 public interface UserService {
-//methode pour admin
+
+    //methode pour admin
     List<User> lister();
     ///methode pour admin
-    String creer(User user,Long id_user);
+    String creer(User user,Long iduser);
 //methode pour admin
-    User createAdmin(User user, Long id_user);
+    String createAdmin(User user, Long iduser);
 
-    User modifier(User user, Long id_user);
+    User modifier(User user, Long iduser);
     String sedeconnecter();
-    //User Seconnecter(String email,String password);
+    User Seconnecter(String email,String password);
 
     ///methode pour admin
-    String supprimer(Long id_user);
+    String supprimer(Long iduser);
 
 }

@@ -10,14 +10,14 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long iduser;
     private String nom;
     private String prenom;
     private String contact;
-    private String Password;
+    private String password;
     private String email;
     @Enumerated(EnumType.STRING)
-    private Role role ;
+    private Role role;
 
     @OneToMany(mappedBy = "user")
     List<Probleme> problemes;

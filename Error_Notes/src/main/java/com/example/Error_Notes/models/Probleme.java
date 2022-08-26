@@ -10,15 +10,13 @@ import java.util.List;
 public class Probleme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_probleme;
+    private Long idprobleme;
     private String titre;
     private String description;
     private String technologie;
     private String methodologie;
-
     @Enumerated(EnumType.STRING)
     private Etat etat;
-
     private String motcle;
 
 

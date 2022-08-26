@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 
 public interface ProblemeService {
-    Probleme creer(Probleme probleme);
-    Probleme modifier(Probleme probleme, Long id_probleme);
-    String supprimer(Long id_probleme);
-    Probleme RechercheP(Probleme probleme,String mot_cle);
+    String creer(Probleme probleme,Long idprobleme);
+    Probleme modifier(Probleme probleme, Long idprobleme);
+    String supprimer(Long idprobleme);
+   // Probleme RechercheP(Probleme probleme,String mot_cle);
 }

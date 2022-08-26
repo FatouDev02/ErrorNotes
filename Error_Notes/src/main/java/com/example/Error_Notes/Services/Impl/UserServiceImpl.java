@@ -8,7 +8,6 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,27 +20,38 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public String creer(User user,Long id_user) {
-       /* Optional<User> userOptional=userRepository.findById_user(user.getId_user());
+    public String creer(User user,Long iduser) {
+        Optional<User> userOptional=userRepository.findByEmail(user.getEmail());
         if (userOptional.isPresent()){
             return null;
         }
-        User user1=userRepository.findById_user(id_user).get();
-        user1.setRole(Role.SIMPLEUSER);*/
+        User user1=this.userRepository.save(user);
+        //User user1=userRepository.findByIduser(iduser).get();
+        user1.setRole(Role.SIMPLEUSER);
         this.userRepository.save(user);
-        return "Utilisateur Creer ";
+        return "Utilisateur Creer";
     }
 
     @Override
-    public  User createAdmin(User user, Long id_user){
-        /*User u=userRepository.findById_user(id_user).get();
-        u.setRole(Role.Admin);*/
-        return  userRepository.save(user);
+    public  String createAdmin(User user, Long iduser){
+        Optional<User> userOptional=userRepository.findByEmail(user.getEmail());
+        if (userOptional.isPresent()){
+            return null;
+        }
+        User user1=this.userRepository.save(user);
+        //User user1=userRepository.findByIduser(iduser).get();
+        user1.setRole(Role.Admin);
+        this.userRepository.save(user);
+        return "Admin Creer";
+
+//        User u=userRepository.findByEmail(user.getEmail()).get();
+//        u.setRole(Role.Admin);
+//        return  userRepository.save(user);
     }
 
     @Override
-    public User modifier(User user, Long id_user) {
-        return userRepository.findById(id_user)
+    public User modifier(User user, Long iduser) {
+        return userRepository.findById(iduser)
                 .map(u ->{
                     u.setNom(user.getNom());
                     u.setPrenom(user.getPrenom());
@@ -57,16 +67,16 @@ public class UserServiceImpl implements UserService {
         return "Vous avez été déconnecter !";
     }
 
-   /* @Override
+    @Override
     public User Seconnecter(String email, String password) {
-        Optional<User> user= userRepository.findUserByEmailAndPassword(email,password);
+        Optional<User> user= userRepository.findByEmailAndPassword(email,password);
         // TTT
         if (user.isEmpty()){
             return null;
         }
         return user.get();
 
-    }*/
+    }
 
 //methode  Admin
 @Override
@@ -75,8 +85,8 @@ public List<User> lister() {
     return userRepository.findAll();
 }
     @Override
-    public String supprimer(Long id_user) {
-        userRepository.deleteById(id_user);
+    public String supprimer(Long iduser) {
+        userRepository.deleteById(iduser);
         return "Suppression effectuée avec succés !";
     }
 }

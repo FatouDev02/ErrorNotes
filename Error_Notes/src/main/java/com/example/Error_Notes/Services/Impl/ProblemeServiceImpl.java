@@ -2,7 +2,9 @@ package com.example.Error_Notes.Services.Impl;
 
 import com.example.Error_Notes.Repository.ProblemeRepository;
 import com.example.Error_Notes.Services.ProblemeService;
+import com.example.Error_Notes.models.Etat;
 import com.example.Error_Notes.models.Probleme;
+import com.example.Error_Notes.models.Role;
 import com.example.Error_Notes.models.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +14,26 @@ import java.util.Optional;
 
 @Data
 @Service
+
 public class ProblemeServiceImpl implements ProblemeService {
     @Autowired
     ProblemeRepository problemeRepository;
     @Override
-    public Probleme creer(Probleme probleme) {
-
-        return problemeRepository.save(probleme);
+    public String creer(Probleme probleme,Long idprobleme) {
+        Optional<Probleme> problemeOptional=problemeRepository.findByIdprobleme(probleme.getIdprobleme());
+        if(problemeOptional.isPresent()){
+            return null;
+        }
+        Probleme probleme1=this.problemeRepository.save(probleme);
+        probleme1.setEtat(Etat.INITIAL);
+        this.problemeRepository.save(probleme);
+        return "Probleme creer";
     }
 
+
     @Override
-    public Probleme modifier(Probleme probleme, Long id_probleme) {
-        return problemeRepository.findById(id_probleme)
+    public Probleme modifier(Probleme probleme, Long idprobleme) {
+        return problemeRepository.findById(idprobleme)
                 .map(p -> {
                     p.setTitre(probleme.getTitre());
                     p.setDescription(probleme.getDescription());
@@ -35,18 +45,17 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public String supprimer(Long id_probleme) {
-        problemeRepository.deleteById(id_probleme);
+    public String supprimer(Long idprobleme) {
+        problemeRepository.deleteById(idprobleme);
         return "Suppression effectuée avec succès";
     }
 
-    @Override
-    public Probleme RechercheP(Probleme probleme,String motcle) {
-        Optional<Probleme> problemeOptional=problemeRepository.findByMotcle(motcle);
-        if (problemeOptional.isEmpty()){
-            return null;
-        }
-        return problemeOptional.get();
-
-    }
+//    @Override
+//    public Probleme RechercheP(Probleme probleme,String motcle) {
+//        Optional<Probleme> problemeOptional=problemeRepository.findByMotcle(motcle);
+//        if (problemeOptional.isEmpty()){
+//            return null;
+//        }
+//        return problemeOptional.get();
+//    }
 }

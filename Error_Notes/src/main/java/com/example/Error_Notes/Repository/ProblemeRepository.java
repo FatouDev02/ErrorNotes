@@ -14,5 +14,5 @@ public interface ProblemeRepository extends JpaRepository<Probleme, Long> {
 
 
 
-    Optional<Probleme> findByMotcle(String motcle);
+    Optional<Probleme> findByIdprobleme(Long idprobleme);
 }
