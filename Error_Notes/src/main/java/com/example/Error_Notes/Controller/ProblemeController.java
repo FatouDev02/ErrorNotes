@@ -22,17 +22,17 @@ public class ProblemeController {
         return problemeService.recherche(mot_cle);
     }
     @PostMapping("/add")
-    String add(@RequestBody Probleme probleme,Long id_probleme){
-        if(this.problemeService.creer(probleme,id_probleme)==null){
+    String add(@RequestBody Probleme probleme,Long idprobleme){
+        if(this.problemeService.creer(probleme,idprobleme)==null){
             return "cet probleme existe deja";
         }
         return "probleme ajouté";
     }
 
 
-    @PutMapping("/update/{id_probleme}")
-    Probleme update(@RequestBody Probleme probleme, @PathVariable Long id_probleme){
-        return problemeService.modifier(probleme, id_probleme);
+    @PutMapping("/update/{idprobleme}")
+    Probleme update(@RequestBody Probleme probleme, @PathVariable Long idprobleme){
+        return problemeService.modifier(probleme, idprobleme);
     }
 
 //   @GetMapping("/search/{mot_cle}")
@@ -40,9 +40,9 @@ public class ProblemeController {
 //        return problemeService.RechercheP(probleme,motcle);
 //    }
 
-    @DeleteMapping("/delete/{id_probleme}")
-    String delete(@PathVariable Long id_probleme){
-        return problemeService.supprimer(id_probleme);
+    @DeleteMapping("/delete/{idprobleme}")
+    String delete(@PathVariable Long idprobleme){
+        return problemeService.supprimer(idprobleme);
     }
 
 
