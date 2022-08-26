@@ -7,11 +7,15 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Data
 @Service
 public class ProblemeServiceImpl implements ProblemeService {
     @Autowired
     ProblemeRepository problemeRepository;
+
+
     @Override
     public Probleme creer(Probleme probleme) {
         return problemeRepository.save(probleme);
@@ -37,7 +41,17 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public Probleme RechercheP(Probleme probleme) {
-        return null;
+    public Object recherche(String mot_cle) {
+        if (mot_cle != null) {
+            List<Probleme> retrouve = problemeRepository.findAll(mot_cle);
+            System.out.println(retrouve);
+            if (retrouve.size() != 0) {
+                return retrouve;
+            }else{
+                return "Désolé ce mot est introuvable !!";
+            }
+        }
+        return problemeRepository.findAll();
     }
+
 }

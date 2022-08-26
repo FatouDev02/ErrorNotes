@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User Seconnecter(User user) {
+    public String Seconnecter(User user) {
         return null;
     }
 

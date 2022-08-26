@@ -12,7 +12,7 @@ public interface UserService {
     User creer(User user);
     User modifier(User user, Long id_user);
     String sedeconnecter();
-    User Seconnecter(User user);
+    String Seconnecter(User user);
     String supprimer(Long id_user);
 
 }
