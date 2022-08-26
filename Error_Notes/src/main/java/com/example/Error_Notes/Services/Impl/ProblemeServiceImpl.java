@@ -2,12 +2,14 @@ package com.example.Error_Notes.Services.Impl;
 
 import com.example.Error_Notes.Repository.ProblemeRepository;
 import com.example.Error_Notes.Services.ProblemeService;
+import com.example.Error_Notes.models.Etat;
 import com.example.Error_Notes.models.Probleme;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Service
@@ -17,8 +19,15 @@ public class ProblemeServiceImpl implements ProblemeService {
 
 
     @Override
-    public Probleme creer(Probleme probleme) {
-        return problemeRepository.save(probleme);
+    public String creer(Probleme probleme, Long id_probleme) {
+        Optional<Probleme> problemeOptional=problemeRepository.findByIdprobleme(probleme.getIdprobleme());
+        if(problemeOptional.isPresent()){
+            return null;
+        }
+        Probleme probleme1=this.problemeRepository.save(probleme);
+        probleme1.setEtat(Etat.INITIAL);
+        this.problemeRepository.save(probleme);
+        return "Probleme creer";
     }
 
     @Override
