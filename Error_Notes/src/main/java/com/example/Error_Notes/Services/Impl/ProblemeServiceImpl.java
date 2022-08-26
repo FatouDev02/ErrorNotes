@@ -19,7 +19,7 @@ public class ProblemeServiceImpl implements ProblemeService {
 
 
     @Override
-    public String creer(Probleme probleme, Long id_probleme) {
+    public String creer(Probleme probleme, Long idprobleme) {
         Optional<Probleme> problemeOptional=problemeRepository.findByIdprobleme(probleme.getIdprobleme());
         if(problemeOptional.isPresent()){
             return null;
@@ -31,8 +31,8 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public Probleme modifier(Probleme probleme, Long id_probleme) {
-        return problemeRepository.findById(id_probleme)
+    public Probleme modifier(Probleme probleme, Long idprobleme) {
+        return problemeRepository.findById(idprobleme)
                 .map(p -> {
                     p.setTitre(probleme.getTitre());
                     p.setDescription(probleme.getDescription());
@@ -44,8 +44,8 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public String supprimer(Long id_probleme) {
-        problemeRepository.deleteById(id_probleme);
+    public String supprimer(Long idprobleme) {
+        problemeRepository.deleteById(idprobleme);
         return "Suppression effectuée avec succés";
     }
 

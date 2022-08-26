@@ -9,8 +9,8 @@ import java.util.List;
 @Service
 public interface ProblemeService {
     //List<Probleme> lister(String mot_cle);
-    String creer(Probleme probleme, Long id_probleme);
-    Probleme modifier(Probleme probleme, Long id_probleme);
-    String supprimer(Long id_probleme);
+    String creer(Probleme probleme, Long idprobleme);
+    Probleme modifier(Probleme probleme, Long idprobleme);
+    String supprimer(Long idprobleme);
     Object recherche(String mot_cle);
 }
