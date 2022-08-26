@@ -22,8 +22,8 @@ public class ProblemeController {
         return problemeService.recherche(mot_cle);
     }
     @PostMapping("/add")
-    String add(@RequestBody Probleme probleme,Long idprobleme){
-        if(this.problemeService.creer(probleme,idprobleme)==null){
+    String add(@RequestBody Probleme probleme,Long id_probleme){
+        if(this.problemeService.creer(probleme,id_probleme)==null){
             return "cet probleme existe deja";
         }
         return "probleme ajouté";
