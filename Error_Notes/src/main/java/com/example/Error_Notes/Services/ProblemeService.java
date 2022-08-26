@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface ProblemeService {
     //List<Probleme> lister(String mot_cle);
-    Probleme creer(Probleme probleme);
+    String creer(Probleme probleme, Long id_probleme);
     Probleme modifier(Probleme probleme, Long id_probleme);
     String supprimer(Long id_probleme);
     Object recherche(String mot_cle);
