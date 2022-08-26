@@ -29,8 +29,8 @@ public class ProblemeController {
 
     @ApiOperation(value = "Ajouter un Probleme ")
     @PostMapping("/add")
-    String add(@RequestBody Probleme probleme,Long idprobleme){
-        if(this.problemeService.creer(probleme,idprobleme)==null){
+    String add(@RequestBody Probleme probleme,Long id_probleme){
+        if(this.problemeService.creer(probleme,id_probleme)==null){
             return "cet probleme existe deja";
         }
         return "probleme ajouté";
