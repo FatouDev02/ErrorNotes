@@ -17,7 +17,6 @@ public class Probleme {
     private String methodologie;
     @Enumerated(EnumType.STRING)
     private Etat etat;
-    private String motcle;
 
 
     @OneToOne
