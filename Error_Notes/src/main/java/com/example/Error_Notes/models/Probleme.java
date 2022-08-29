@@ -19,11 +19,12 @@ public class Probleme {
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
-@JsonIgnore
+    @JsonIgnore
     @OneToOne
     //@JoinColumn(name = "solution_id_solution")
     private Solution solution;
-@JsonIgnore
+
+    @JsonIgnore
     @ManyToOne
     //@JoinColumn(name = "user_id_user")
     private User user;

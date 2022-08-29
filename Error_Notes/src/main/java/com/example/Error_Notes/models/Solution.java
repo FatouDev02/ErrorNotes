@@ -1,5 +1,6 @@
 package com.example.Error_Notes.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,9 +16,11 @@ public class Solution {
     private String temps;
     private String ressource;
 
+    @JsonIgnore
     @OneToOne
     private Probleme problemes;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "solution")
     List<Commentaire> commentaires;
 
