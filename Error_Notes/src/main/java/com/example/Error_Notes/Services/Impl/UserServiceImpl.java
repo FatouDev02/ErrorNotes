@@ -2,6 +2,7 @@ package com.example.Error_Notes.Services.Impl;
 
 import com.example.Error_Notes.Repository.UserRepository;
 import com.example.Error_Notes.Services.UserService;
+import com.example.Error_Notes.models.Probleme;
 import com.example.Error_Notes.models.Role;
 import com.example.Error_Notes.models.User;
 import lombok.Data;
@@ -88,5 +89,19 @@ public List<User> lister() {
     public String supprimer(Long iduser) {
         userRepository.deleteById(iduser);
         return "Suppression effectuée avec succés !";
+    }
+
+    @Override
+    public Object recherche(String mot_cle) {
+        if (mot_cle != null) {
+            List<User> retrouve = userRepository.findAll(mot_cle);
+            System.out.println(retrouve);
+            if (retrouve.size() != 0) {
+                return retrouve;
+            }else{
+                return "Désolé ce mot est introuvable !!";
+            }
+        }
+        return userRepository.findAll();
     }
 }

@@ -21,6 +21,7 @@ public class ProblemeController {
     Object search(@PathVariable String mot_cle){
         return problemeService.recherche(mot_cle);
     }
+
     @PostMapping("/add")
     String add(@RequestBody Probleme probleme,Long idprobleme){
         if(this.problemeService.creer(probleme,idprobleme)==null){
@@ -35,10 +36,6 @@ public class ProblemeController {
         return problemeService.modifier(probleme, idprobleme);
     }
 
-//   @GetMapping("/search/{mot_cle}")
-//    Probleme s(@RequestBody Probleme probleme,@PathVariable String motcle){
-//        return problemeService.RechercheP(probleme,motcle);
-//    }
 
     @DeleteMapping("/delete/{idprobleme}")
     String delete(@PathVariable Long idprobleme){

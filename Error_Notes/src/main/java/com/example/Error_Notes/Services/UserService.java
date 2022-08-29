@@ -22,5 +22,6 @@ public interface UserService {
 
     ///methode pour admin
     String supprimer(Long iduser);
+    Object recherche(String mot_cle);
 
 }

@@ -37,10 +37,10 @@ public class UserController {
     @PostMapping("/admin/add")
     public  String admin(@RequestBody User user,Long iduser){
         if( this.userService.createAdmin(user,iduser)==null){
-            return "admin existant";
+            return "Admin existant";
         }
         //this.userService.creer(user,iduser);
-        return "existant ajouté";
+        return "Admin ajouté";
 
     }
 
@@ -71,5 +71,11 @@ public class UserController {
     @DeleteMapping("/delete/{iduser}")
     String delete(Long iduser){
         return userService.supprimer(iduser);
+    }
+
+    //Methode pour la recherche par mot clé sur le prénom et nom
+    @GetMapping("/search/{mot_cle}")
+    Object search(@PathVariable String mot_cle){
+        return userService.recherche(mot_cle);
     }
 }
