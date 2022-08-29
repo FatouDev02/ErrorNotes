@@ -19,12 +19,13 @@ public class User {
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
-@JsonIgnore
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user",
             cascade=CascadeType.ALL)
     List<Probleme> problemes;
 
-@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     List<Commentaire> commentaires;
 }
