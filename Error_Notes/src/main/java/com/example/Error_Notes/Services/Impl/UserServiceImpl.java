@@ -51,17 +51,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User modifier(User user, Long iduser) {
-        return userRepository.findById(iduser)
-                .map(u ->{
-                    u.setNom(user.getNom());
-                    u.setPrenom(user.getPrenom());
-                    u.setContact(user.getContact());
-                    u.setPassword(user.getPassword());
-                    u.setEmail(user.getEmail());
-                    return userRepository.save(u);
-                } ).orElseThrow(() -> new RuntimeException("Cet utilisateur n'existe pas !"));
+      User user1 = this.userRepository.findById(iduser).orElseThrow();
+            user1.setNom(user.getNom());
+            user1.setPrenom(user.getPrenom());
+            user1.setEmail(user.getEmail());
+            user1.setPassword(user.getPassword());
+            user1.setContact(user.getContact());
+            //user1.setRole(user.getRole());
+            return  userRepository.save(user1);
     }
-
     @Override
     public String sedeconnecter() {
         return "Vous avez été déconnecter !";
@@ -86,6 +84,7 @@ public List<User> lister() {
 }
     @Override
     public String supprimer(Long iduser) {
+
         userRepository.deleteById(iduser);
         return "Suppression effectuée avec succés !";
     }

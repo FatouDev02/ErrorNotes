@@ -25,8 +25,8 @@ public class SwaggConfig {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("ApiTourist interface - Spring Boot Swagger Configuration")
-                .description("\"Configuration de Swagger pour l'application ApiTourist \"")
+                .title("ErrorNotes interface - Spring Boot Swagger Configuration")
+                .description("\"Configuration de Swagger pour l'application ErrorNotes \"")
                 .version("1.1.0")
                 .license("Apache 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")

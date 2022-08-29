@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping("/connexion/{email}/{password}")
     public String connexion(@PathVariable("email") String email, @PathVariable("password") String password){
         if(this.userService.Seconnecter(email,password)==null){
-            return "aaa";
+            return "Veuiller entrer un email et un mot de passe existant";
       }
         this.userService.Seconnecter(email,password);
         return  "vous etes connectée";
@@ -46,18 +46,18 @@ public class UserController {
             return "admin existant";
         }
         //this.userService.creer(user,iduser);
-        return "existant ajouté";
+        return "Admin ajouté";
 
     }
 
     @ApiOperation(value = "Modifier un compte ")
-    @PutMapping("/update/{id_user}")
+    @PutMapping("/update/{iduser}")
     User update(@RequestBody User user, @PathVariable Long iduser){
         //retourner un String
         return userService.modifier(user, iduser);
     }
     //@GetMapping("/")
-    String deconnect(){
+    public String deconnect(){
         return userService.sedeconnecter();
     }
 
@@ -68,15 +68,11 @@ public class UserController {
         return userService.lister();
     }
 
-
-
-
-
-
-
-//methode pour admin
+//methode pour
+@ApiOperation(value = " Supprimer un  utilisateur ")
     @DeleteMapping("/delete/{iduser}")
-    String delete(Long iduser){
-        return userService.supprimer(iduser);
+    public String delete(@PathVariable Long iduser){
+        this.userService.supprimer(iduser);
+        return "utilisateur supprimée";
     }
 }

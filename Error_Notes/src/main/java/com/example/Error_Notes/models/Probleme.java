@@ -1,5 +1,6 @@
 package com.example.Error_Notes.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,11 +19,11 @@ public class Probleme {
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
-
+@JsonIgnore
     @OneToOne
     //@JoinColumn(name = "solution_id_solution")
     private Solution solution;
-
+@JsonIgnore
     @ManyToOne
     //@JoinColumn(name = "user_id_user")
     private User user;
