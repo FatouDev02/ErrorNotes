@@ -1,5 +1,6 @@
 package com.example.Error_Notes.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,10 +19,12 @@ public class User {
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToMany(mappedBy = "user")
+@JsonIgnore
+    @OneToMany(mappedBy = "user",
+            cascade=CascadeType.ALL)
     List<Probleme> problemes;
 
+@JsonIgnore
     @OneToMany(mappedBy = "user")
     List<Commentaire> commentaires;
 }

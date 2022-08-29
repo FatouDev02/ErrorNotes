@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Data
 @RequestMapping("/commentaire")
-
 @Api(value = "hello", description = "Methodes  Commentaire")
-
 public class CommentaireController {
     @Autowired
     CommentaireService commentaireService;
@@ -25,7 +23,7 @@ public class CommentaireController {
     }
     @DeleteMapping("/delete/{id_Commentaire}")
     @ApiOperation(value = "Supprimer un commentaire ")
-    String delete(@PathVariable Long id_Commentaire){
+    public String delete(@PathVariable Long id_Commentaire){
 
         return commentaireService.Supprimer(id_Commentaire);
     }

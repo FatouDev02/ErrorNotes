@@ -30,7 +30,7 @@ public class SolutionController {
     }
     @ApiOperation(value = " Supprimer une Solution")
     @DeleteMapping("/delete/{id_solution}")
-    String delete(@PathVariable Long id_solution){
+    public String delete(@PathVariable Long id_solution){
         return solutionService.supprimer(id_solution);
     }
 }
