@@ -14,8 +14,10 @@ public class User {
     private Long iduser;
     private String nom;
     private String prenom;
-    private String contact;
+    private String username;
+
     private String password;
+    private String Adresse;
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;

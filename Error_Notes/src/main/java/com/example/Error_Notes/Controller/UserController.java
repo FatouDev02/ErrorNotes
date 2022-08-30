@@ -30,6 +30,7 @@ public class UserController {
 
     }
 
+
     @ApiOperation(value = "Creer un compte utilisateur ")
     @PostMapping("/add")
     public String add(@RequestBody User user,Long iduser){
@@ -63,6 +64,7 @@ public class UserController {
 
     //methode pour admin
     @ApiOperation(value = "  Lister les utilisateurs ")
+
     @GetMapping("/list")
     List<User> lister(){
         return userService.lister();
