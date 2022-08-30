@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public String creer(User user,Long iduser) {
         Optional<User> userOptional=userRepository.findByEmail(user.getEmail());
         if (userOptional.isPresent()){
-            return null;
+            return "cet utilisateur existe deja";
         }
         User user1=this.userRepository.save(user);
         //User user1=userRepository.findByIduser(iduser).get();
@@ -56,7 +56,8 @@ public class UserServiceImpl implements UserService {
             user1.setPrenom(user.getPrenom());
             user1.setEmail(user.getEmail());
             user1.setPassword(user.getPassword());
-            user1.setContact(user.getContact());
+            user1.setAdresse(user.getAdresse());
+            user1.setUsername(user.getUsername());
             //user1.setRole(user.getRole());
             return  userRepository.save(user1);
     }
