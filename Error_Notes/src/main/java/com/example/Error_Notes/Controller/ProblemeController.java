@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/probleme")
+
 @Data
 
 @Api(value = "hello", description = "Methodes Problemes")
@@ -21,35 +21,34 @@ import java.util.List;
 public class ProblemeController {
     @Autowired
     ProblemeService problemeService;
-    @ApiOperation(value = "Rechercher un probleme par mot-clé ")
-    @GetMapping("/search/{mot_cle}")
-    Object search(@PathVariable String mot_cle){
-        return problemeService.recherche(mot_cle);
-    }
+//    @ApiOperation(value = "Rechercher un probleme par mot-clé ")
+//    @GetMapping("/search/{mot_cle}")
+//    Object search(@PathVariable String mot_cle){
+//        return problemeService.recherche(mot_cle);
+//    }
 
-    @ApiOperation(value = "Ajouter un Probleme ")
-    @PostMapping("/add")
-    String add(@RequestBody Probleme probleme,Long idprobleme){
-        if(this.problemeService.creer(probleme,idprobleme)==null){
-            return "cet probleme existe deja";
-        }
-        return "probleme ajouté";
-    }
+//    @ApiOperation(value = "Ajouter un Probleme ")
+//    @PostMapping("/add")
+//    public String add(@RequestBody Probleme probleme,Long id_probleme){
+//        if(this.problemeService.creer(probleme,id_probleme)==null){
+//            return "cet probleme existe deja";
+//        }
+//        return "probleme ajouté";
+//    }
 
     @ApiOperation(value = "Modifier un probleme ")
     @PutMapping("/update/{idprobleme}")
-    Probleme update(@RequestBody Probleme probleme, @PathVariable Long idprobleme){
-        return problemeService.modifier(probleme, idprobleme);
+    public String update(@RequestBody Probleme probleme, @PathVariable Long idprobleme){
+
+                this.problemeService.modifier(probleme, idprobleme);
+                return "modification reussi";
     }
 
-//   @GetMapping("/search/{mot_cle}")
-//    Probleme s(@RequestBody Probleme probleme,@PathVariable String motcle){
-//        return problemeService.RechercheP(probleme,motcle);
-//    }
-@ApiOperation(value = "Supprimer un probleme ")
-    @DeleteMapping("/delete/{idprobleme}")
-    String delete(@PathVariable Long idprobleme){
-        return problemeService.supprimer(idprobleme);
+   @ApiOperation(value = "Supprimer un probleme ")
+   @DeleteMapping("/delete/{idprobleme}")
+   public  String delete(@PathVariable Long idprobleme){
+        this.problemeService.supprimer(idprobleme);
+        return "Suppression reussi";
     }
 
 
