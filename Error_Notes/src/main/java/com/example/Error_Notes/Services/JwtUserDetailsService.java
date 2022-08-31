@@ -1,8 +1,10 @@
 package com.example.Error_Notes.Services;
 
+import com.example.Error_Notes.Repository.CommentaireRepository;
+import com.example.Error_Notes.Repository.ProblemeRepository;
+import com.example.Error_Notes.Repository.SolutionRepository;
 import com.example.Error_Notes.Repository.UserRepository;
-import com.example.Error_Notes.models.User;
-import com.example.Error_Notes.models.UserDto;
+import com.example.Error_Notes.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -20,6 +23,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
+    @Autowired
+    private ProblemeRepository problemeRepository;
+    @Autowired
+    private SolutionRepository solutionRepository;
+    @Autowired
+    private CommentaireRepository commentaireRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -31,6 +40,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user1.getUsername(), user1.getPassword(),
                 new ArrayList<>());
     }
+    /////////////////////////////Utilisateurs
     public User save(UserDto userDto){
         User newUser = new User();
         newUser.setUsername(userDto.getUsername());
@@ -63,6 +73,84 @@ public class JwtUserDetailsService implements UserDetailsService {
         userRepository.deleteById(iduser);
         return "Suppression effectuée avec succés !";
     }
+    //////////////////////////////FinUser
+    //////////////////////////////////////////Probleme
+    public Object recherche(String mot_cle) {
+        if (mot_cle != null) {
+            List<Probleme> retrouve = problemeRepository.findAll(mot_cle);
+//            System.out.println(retrouve);
+            if (retrouve.size() != 0) {
+                return retrouve;
+            }else{
+                return "Désolé ce mot est introuvable !!";
+            }
+        }
+        return problemeRepository.findAll();
+    }
+    public String creerprobleme(Probleme probleme, Long idprobleme) {
+        Optional<Probleme> problemeOptional=problemeRepository.findByIdprobleme(probleme.getIdprobleme());
+        if(problemeOptional.isPresent()){
+            return null;
+        }
+        // Probleme probleme1=this.problemeRepository.save(probleme);
+        //probleme1.setEtat(Etat.INITIAL);
+        this.problemeRepository.save(probleme);
+        return "Problème créer";
+    }
+    public Probleme modifierprobleme(Probleme probleme, Long idprobleme) {
+        Probleme probleme1= problemeRepository.findById(idprobleme).orElseThrow();
+        // probleme1.setEtat(probleme.getEtat());
+        probleme1.setTitre(probleme.getTitre());
+        probleme1.setEtat(probleme.getEtat());
+        probleme1.setDescription(probleme.getDescription());
+        probleme1.setTechnologie(probleme.getTechnologie());
+        probleme1.setMethodologie(probleme.getMethodologie());
+        return problemeRepository.save(probleme1);
+    }
 
+    public String supprimerprobleme(Long idprobleme) {
+        problemeRepository.deleteById(idprobleme);
+        return "Suppression effectuée avec succés";
+    }
+    /////////////////////////////////////////////Fin Probleme
+
+
+    //////////////////////////////////////////Solution
+
+    public Solution creerSolution(Solution solution) {
+
+        return solutionRepository.save(solution);
+    }
+
+    public Solution modifierSolution(Solution solution, Long id_solution) {
+        return solutionRepository.findById(id_solution)
+                .map(s ->{
+                    s.setDescription(solution.getDescription());
+                    s.setTemps(solution.getTemps());
+                    s.setRessource(solution.getRessource());
+                    return solutionRepository.save(s);
+                } ).orElseThrow(() -> new RuntimeException("Cette solution n'existe pas !"));
+    }
+    public String supprimerSolution(Long id_solution) {
+        solutionRepository.deleteById(id_solution);
+        return "Suppression effectuée avec succés !";
+    }
+/////////////////////////////////////////////Fin Solution
+public Commentaire CreerComm(Commentaire commentaire) {
+
+        return commentaireRepository.save(commentaire);
+}
+
+
+    public List<Commentaire> listerComm() {
+
+        return commentaireRepository.findAll();
+    }
+
+    public String SupprimerComm(Long id_Commentaire) {
+        commentaireRepository.deleteById(id_Commentaire);
+        return"Commentaire supprimé";
+
+    }
 
 }
