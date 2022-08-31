@@ -71,10 +71,11 @@ public class UserController {
     }
 
 //methode pour
-@ApiOperation(value = " Supprimer un  utilisateur ")
+    @ApiOperation(value = " Supprimer un  utilisateur ")
     @DeleteMapping("/delete/{iduser}")
     public String delete(@PathVariable Long iduser){
         this.userService.supprimer(iduser);
         return "utilisateur supprimée";
     }
+
 }

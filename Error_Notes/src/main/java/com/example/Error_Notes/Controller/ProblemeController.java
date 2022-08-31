@@ -44,12 +44,8 @@ public class ProblemeController {
                 return "modification reussi";
     }
 
-//   @GetMapping("/search/{mot_cle}")
-//    Probleme s(@RequestBody Probleme probleme,@PathVariable String motcle){
-//        return problemeService.RechercheP(probleme,motcle);
-//    }
    @ApiOperation(value = "Supprimer un probleme ")
-    @DeleteMapping("/delete/{idprobleme}")
+   @DeleteMapping("/delete/{idprobleme}")
    public  String delete(@PathVariable Long idprobleme){
         this.problemeService.supprimer(idprobleme);
         return "Suppression reussi";
