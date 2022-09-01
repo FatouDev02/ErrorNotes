@@ -39,7 +39,7 @@ public class ProblemeServiceImpl implements ProblemeService {
         probleme1.setEtat(probleme.getEtat());
         probleme1.setDescription(probleme.getDescription());
         probleme1.setTechnologie(probleme.getTechnologie());
-        probleme1.setMethodologie(probleme.getMethodologie());
+
         return problemeRepository.save(probleme1);
                  }
 

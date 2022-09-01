@@ -15,7 +15,6 @@ public class Probleme {
     private String titre;
     private String description;
     private String technologie;
-    private String methodologie;
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
@@ -24,7 +23,7 @@ public class Probleme {
     //@JoinColumn(name = "solution_id_solution")
     private Solution solution;
 
-    @JsonIgnore
+
     @ManyToOne
     //@JoinColumn(name = "user_id_user")
     private User user;
