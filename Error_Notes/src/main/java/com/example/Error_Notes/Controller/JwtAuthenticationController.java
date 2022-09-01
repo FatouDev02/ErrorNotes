@@ -50,9 +50,9 @@ public class JwtAuthenticationController {
     }
 @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/update/{iduser}")
-    User update(@RequestBody User user, @PathVariable Long iduser){
+    public ResponseEntity<?> update(@RequestBody User user, @PathVariable Long iduser){
         //retourner un String
-        return userDetailsService.modifier(user,iduser);
+        return ResponseEntity.ok(userDetailsService.modifier(user,iduser));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

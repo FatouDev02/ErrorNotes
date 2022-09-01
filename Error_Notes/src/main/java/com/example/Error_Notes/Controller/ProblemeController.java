@@ -37,7 +37,7 @@ public class ProblemeController {
 //    }
 
     @ApiOperation(value = "Modifier un probleme ")
-    @PutMapping("/update/{idprobleme}")
+    @PutMapping("/updatep/{idprobleme}")
     public String update(@RequestBody Probleme probleme, @PathVariable Long idprobleme){
 
                 this.problemeService.modifier(probleme, idprobleme);

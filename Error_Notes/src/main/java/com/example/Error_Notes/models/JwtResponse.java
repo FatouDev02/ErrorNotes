@@ -1,5 +1,6 @@
 package com.example.Error_Notes.models;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class JwtResponse implements Serializable {

@@ -91,17 +91,17 @@ public List<User> lister() {
         return "Suppression effectuée avec succés !";
     }
 
-    @Override
-    public Object recherche(String mot_cle) {
-        if (mot_cle != null) {
-            List<User> retrouve = userRepository.findAll(mot_cle);
-            System.out.println(retrouve);
-            if (retrouve.size() != 0) {
-                return retrouve;
-            }else{
-                return "Désolé ce mot est introuvable !!";
-            }
-        }
-        return userRepository.findAll();
-    }
+//    @Override
+//    public Object recherche(String mot_cle) {
+//        if (mot_cle != null) {
+//            List<User> retrouve = userRepository.findAll(mot_cle);
+//            System.out.println(retrouve);
+//            if (retrouve.size() != 0) {
+//                return retrouve;
+//            }else{
+//                return "Désolé ce mot est introuvable !!";
+//            }
+//        }
+//        return userRepository.findAll();
+//    }
 }
