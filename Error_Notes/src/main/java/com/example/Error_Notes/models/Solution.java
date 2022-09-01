@@ -16,7 +16,7 @@ public class Solution {
     private String temps;
     private String ressource;
 
-    @JsonIgnore
+
     @OneToOne
     private Probleme problemes;
 
