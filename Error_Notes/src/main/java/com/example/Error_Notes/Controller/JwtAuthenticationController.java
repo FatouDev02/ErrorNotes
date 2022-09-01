@@ -6,6 +6,7 @@ import com.example.Error_Notes.models.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -45,22 +46,26 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(userDetailsService.save(user));
 
     }
-
+@PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/update/{iduser}")
     User update(@RequestBody User user, @PathVariable Long iduser){
         //retourner un String
         return userDetailsService.modifier(user,iduser);
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/list")
     List<User> lister(){
         return userDetailsService.lister();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/delete/{iduser}")
     public String delete(@PathVariable Long iduser){
         this.userDetailsService.supprimer(iduser);
         return "utilisateur supprimée";
     }
+
     /////////////////////////Fin User
 
     private void authenticate(String username, String password) throws Exception {
@@ -127,6 +132,7 @@ public class JwtAuthenticationController {
 
         return userDetailsService.CreerComm(commentaire);
     }
+
     @DeleteMapping("/delete/{id_Commentaire}")
     @ApiOperation(value = "Supprimer un commentaire ")
     public String deleteCom(@PathVariable Long id_Commentaire){

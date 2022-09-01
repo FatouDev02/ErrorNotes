@@ -104,7 +104,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         probleme1.setEtat(probleme.getEtat());
         probleme1.setDescription(probleme.getDescription());
         probleme1.setTechnologie(probleme.getTechnologie());
-        probleme1.setMethodologie(probleme.getMethodologie());
         return problemeRepository.save(probleme1);
     }
 
@@ -112,6 +111,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         problemeRepository.deleteById(idprobleme);
         return "Suppression effectuée avec succés";
     }
+
+
     /////////////////////////////////////////////Fin Probleme
 
 
