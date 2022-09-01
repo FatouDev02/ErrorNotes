@@ -2,6 +2,7 @@ package com.example.Error_Notes.Controller;
 
 import com.example.Error_Notes.ConfigurationJWTSERCURITY.JwtTokenUtil;
 import com.example.Error_Notes.Services.JwtUserDetailsService;
+import com.example.Error_Notes.Services.SolutionService;
 import com.example.Error_Notes.models.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class JwtAuthenticationController {
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
-
+@Autowired
+    private SolutionService solutionService;
     @RequestMapping(value ="/authenticate",method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -87,6 +89,7 @@ public class JwtAuthenticationController {
     @PostMapping("/addprob")
     public String addp(@RequestBody Probleme probleme, Long id_probleme){
         if(this.userDetailsService.creerprobleme(probleme,id_probleme)==null){
+
             return "cet probleme existe deja";
         }
         return "probleme ajouté";
@@ -105,6 +108,10 @@ public class JwtAuthenticationController {
         this.userDetailsService.supprimerprobleme(idprobleme);
         return "Suppression reussi";
     }
+    @GetMapping("/displayprobleme/{titre}")
+    public Probleme displayp(@PathVariable String titre){
+        return userDetailsService.trouverProblemeParTitre(titre);
+    }
     //////////////////////////FinProbleme
     /////////////////////////////Solution
     @ApiOperation(value = "Donner une solution")
@@ -122,6 +129,7 @@ public class JwtAuthenticationController {
     @ApiOperation(value = " Supprimer une Solution")
     @DeleteMapping("/deletesolution/{id_solution}")
     public String deleteS(@PathVariable Long id_solution){
+
         return  userDetailsService.supprimerSolution(id_solution);
     }
     /////////////////FInSolution
@@ -133,11 +141,17 @@ public class JwtAuthenticationController {
         return userDetailsService.CreerComm(commentaire);
     }
 
-    @DeleteMapping("/delete/{id_Commentaire}")
+    @DeleteMapping("/deletecomm/{id_Commentaire}")
     @ApiOperation(value = "Supprimer un commentaire ")
     public String deleteCom(@PathVariable Long id_Commentaire){
 
         return userDetailsService.SupprimerComm(id_Commentaire);
+    }
+    @GetMapping("/Affichercommparsolution/{id_solution}")
+    public List<Commentaire> displayComm(@PathVariable Long id_solution){
+        Solution solution=solutionService.TouverSolutionparId(id_solution);
+        return  userDetailsService.AfficherCommentaireParSolution(solution);
+
     }
     /////////////////////////////FinCommmentaire
 

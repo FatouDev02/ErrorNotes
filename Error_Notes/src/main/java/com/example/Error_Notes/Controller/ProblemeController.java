@@ -51,5 +51,9 @@ public class ProblemeController {
         return "Suppression reussi";
     }
 
+    public Probleme displayprb(@PathVariable String titre){
+        return problemeService.trouverProblemeParTitre(titre);
+    }
+
 
 }
