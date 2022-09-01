@@ -12,7 +12,9 @@ public class Probleme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idprobleme;
+    @Column(unique = true)
     private String titre;
+
     private String description;
     private String technologie;
     @Enumerated(EnumType.STRING)

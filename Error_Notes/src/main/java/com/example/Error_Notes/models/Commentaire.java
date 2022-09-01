@@ -16,12 +16,12 @@ public class Commentaire {
     private LocalDateTime dateCommentaire = LocalDateTime.now();
 
 
-    @JsonIgnore
+
     @ManyToOne
     //@JoinColumn(name = "solution_id_solution")
     private Solution solution;
 
-    @JsonIgnore
+
     @ManyToOne
     //@JoinColumn(name = "user_id_user")
     private User user;

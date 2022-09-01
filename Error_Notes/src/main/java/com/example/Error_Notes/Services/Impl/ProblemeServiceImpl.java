@@ -4,6 +4,7 @@ import com.example.Error_Notes.Repository.ProblemeRepository;
 import com.example.Error_Notes.Services.ProblemeService;
 import com.example.Error_Notes.models.Etat;
 import com.example.Error_Notes.models.Probleme;
+import com.example.Error_Notes.models.Solution;
 import com.example.Error_Notes.models.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class ProblemeServiceImpl implements ProblemeService {
         this.problemeRepository.save(probleme);
         return "Probleme creer";
     }
+
 
     @Override
     public Probleme modifier(Probleme probleme, Long idprobleme) {
@@ -62,5 +64,16 @@ public class ProblemeServiceImpl implements ProblemeService {
         }
         return problemeRepository.findAll();
     }
+///////////////////////////////
+    @Override
+    public Probleme trouverProblemeParId(Long id) {
+        return problemeRepository.findById(id).get();
+    }
+
+    @Override
+    public Probleme trouverProblemeParTitre(String titre) {
+        return problemeRepository.findByTitre(titre);
+    }
+
 
 }
