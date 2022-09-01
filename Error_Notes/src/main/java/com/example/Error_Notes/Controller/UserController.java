@@ -67,6 +67,7 @@ public class UserController {
 
     @GetMapping("/list")
     List<User> lister(){
+
         return userService.lister();
     }
 

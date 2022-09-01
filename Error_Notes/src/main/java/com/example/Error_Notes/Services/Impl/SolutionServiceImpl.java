@@ -2,6 +2,7 @@ package com.example.Error_Notes.Services.Impl;
 
 import com.example.Error_Notes.Repository.SolutionRepository;
 import com.example.Error_Notes.Services.SolutionService;
+import com.example.Error_Notes.models.Probleme;
 import com.example.Error_Notes.models.Solution;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,15 @@ public class SolutionServiceImpl implements SolutionService {
         solutionRepository.deleteById(id_solution);
         return "Suppression effectuée avec succés !";
     }
+
+    @Override
+    public Solution AfficherS(Probleme probleme) {
+        return solutionRepository.findByProblemes(probleme);
+    }
+
+    @Override
+    public Solution TouverSolutionparId(Long id_solution) {
+        return solutionRepository.findById(id_solution).get();
+    }
+
 }

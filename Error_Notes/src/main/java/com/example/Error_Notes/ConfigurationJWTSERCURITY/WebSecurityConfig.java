@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
-    //a resolu le prbleme  de confusion de bean
+    //a resolu le prboleme  de confusion de bean
     @Lazy
     private UserDetailsService jwtUserDetailsService;
 
@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate", "/add","/search/{mot_cle}").permitAll().
+                .authorizeRequests().antMatchers("/authenticate", "/add","/displaySolution/{idprobleme} ", "/displayprobleme/{titre}","/search/{mot_cle}").permitAll().
                 // all other requests need to be authenticated
                         anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to

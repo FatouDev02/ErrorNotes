@@ -112,6 +112,17 @@ public class JwtUserDetailsService implements UserDetailsService {
         return "Suppression effectuée avec succés";
     }
 
+    public Probleme trouverProblemeParId(Long id) {
+
+        return problemeRepository.findById(id).get();
+    }
+
+
+    public Probleme trouverProblemeParTitre(String titre) {
+        return problemeRepository.findByTitre(titre);
+    }
+
+
 
     /////////////////////////////////////////////Fin Probleme
 
@@ -151,6 +162,10 @@ public Commentaire CreerComm(Commentaire commentaire) {
     public String SupprimerComm(Long id_Commentaire) {
         commentaireRepository.deleteById(id_Commentaire);
         return"Commentaire supprimé";
+
+    }
+    public List<Commentaire> AfficherCommentaireParSolution(Solution solution) {
+        return commentaireRepository.findBySolution(solution);
 
     }
 
