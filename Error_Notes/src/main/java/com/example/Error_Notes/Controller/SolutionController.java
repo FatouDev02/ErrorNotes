@@ -22,9 +22,12 @@ public class SolutionController {
     @Autowired
     ProblemeService problemeService;
     @ApiOperation(value = "Donner une solution")
-    @PostMapping("/add")
-    Solution add(@RequestBody Solution solution){
-        return solutionService.creer(solution);
+    @PostMapping("/add/{idprobleme}")
+    Solution add(@RequestBody Solution solution,@PathVariable Long idprobleme){
+        Probleme probleme=problemeService.trouverProblemeParId(idprobleme);
+        Solution s=solutionService.creerSolutionByProblem(solution,probleme);
+
+        return s;
     }
     @GetMapping(value = "/displaySolution/{idprobleme}")
     Solution display(@PathVariable Long idprobleme){

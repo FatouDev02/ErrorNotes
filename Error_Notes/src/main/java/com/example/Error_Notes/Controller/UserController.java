@@ -74,8 +74,5 @@ public class UserController {
     }
 
     //Methode pour la recherche par mot clé sur le prénom et nom
-    @GetMapping("/search/{mot_cle}")
-    Object search(@PathVariable String mot_cle){
-        return userService.recherche(mot_cle);
-    }
+
 }

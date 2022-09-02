@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
    // Optional<User> findByPassword(String password);
    Optional<User> findByEmailAndPassword(String email,String password);
+   User findByUsername(String username);
 
     @Query(value = "SELECT * FROM user WHERE user.nom LIKE %?1%" +
             " OR user.prenom LIKE %?1%", nativeQuery = true)

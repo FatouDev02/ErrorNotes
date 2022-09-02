@@ -12,4 +12,5 @@ public interface SolutionService {
     String supprimer(Long id_solution);
     Solution AfficherS(Probleme probleme);
     Solution TouverSolutionparId(Long id_solution);
+    Solution creerSolutionByProblem(Solution solution,Probleme p);
 }
