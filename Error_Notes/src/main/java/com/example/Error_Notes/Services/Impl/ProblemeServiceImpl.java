@@ -2,10 +2,7 @@ package com.example.Error_Notes.Services.Impl;
 
 import com.example.Error_Notes.Repository.ProblemeRepository;
 import com.example.Error_Notes.Services.ProblemeService;
-import com.example.Error_Notes.models.Etat;
 import com.example.Error_Notes.models.Probleme;
-import com.example.Error_Notes.models.Solution;
-import com.example.Error_Notes.models.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +28,6 @@ public class ProblemeServiceImpl implements ProblemeService {
         this.problemeRepository.save(probleme);
         return "Probleme creer";
     }
-
-
     @Override
     public Probleme modifier(Probleme probleme, Long idprobleme) {
         Probleme probleme1= problemeRepository.findById(idprobleme).orElseThrow();
@@ -67,6 +62,7 @@ public class ProblemeServiceImpl implements ProblemeService {
 ///////////////////////////////
     @Override
     public Probleme trouverProblemeParId(Long id) {
+
         return problemeRepository.findById(id).get();
     }
 

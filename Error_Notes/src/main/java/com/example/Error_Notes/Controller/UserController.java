@@ -16,33 +16,39 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/connexion/{email}/{password}")
-    public String connexion(@PathVariable("email") String email, @PathVariable("password") String password){
-        if(this.userService.Seconnecter(email,password)==null){
-            return "aaa";
-      }
-        this.userService.Seconnecter(email,password);
-        return  "vous etes connectée";
-
+  public Object connexion(@PathVariable("email") String email, @PathVariable("password") String password){
+    if(userService.Seconnecter(email,password)==null){
+          return "Connexion échouée";
+     }else {
+        return "Bonjour  " + userService.Seconnecter(email,password).getNom();
     }
+  }
 
 
     @PostMapping("/add")
-    public String add(@RequestBody User user,Long iduser){
-        if( this.userService.creer(user,iduser)==null){
-            return "Cet utilisateur existe deja";
-        }
-         //this.userService.creer(user,iduser);
-         return "Utilisateur ajouté";
+    public String add(@RequestBody User user){
+        return userService.creerunCompte(user);
     }
-    @PostMapping("/admin/add")
-    public  String admin(@RequestBody User user,Long iduser){
-        if( this.userService.createAdmin(user,iduser)==null){
-            return "Admin existant";
-        }
-        //this.userService.creer(user,iduser);
-        return "Admin ajouté";
+//    @PostMapping("/admin}")
+//    public  String admin(@RequestBody User user){
+//
+//        if(userService.Seconnecter(email,password) != null && userService.Seconnecter(email,password).getRole() != null){
+//            return userService.createAdmin(user);
+//        }else {
+//            return "Accès refusé";
+//        }
+//    }
+      @PostMapping("/adminadd/{idSuperAdmin}")
+      public  Object admin(@RequestBody User user,@PathVariable Long idSuperAdmin){
 
-    }
+
+        User user1=userService.creercompteAdmin(user, idSuperAdmin);
+        if(user1!=null){
+            return  user1;
+        }else {
+            return "Impossible de créer l'admin";
+        }
+      }
 
 
     @PutMapping("/update/{id_user}")
@@ -50,27 +56,19 @@ public class UserController {
         //retourner un String
         return userService.modifier(user, iduser);
     }
-    //@GetMapping("/")
-    String deconnect(){
-        return userService.sedeconnecter();
-    }
+
 
     //methode pour admin
-    @GetMapping("/list")
-    List<User> lister(){
-        return userService.lister();
+    @GetMapping("/list/{idadmin}")
+    List<User> lister(@PathVariable Long idadmin){
+        return userService.lister(idadmin);
+
     }
 
-
-
-
-
-
-
 //methode pour admin
-    @DeleteMapping("/delete/{iduser}")
-    String delete(Long iduser){
-        return userService.supprimer(iduser);
+    @DeleteMapping("/delete/{iduser}/{email}")
+    String delete(@PathVariable Long iduser,@PathVariable String email){
+        return userService.supprimer(iduser,email);
     }
 
     //Methode pour la recherche par mot clé sur le prénom et nom

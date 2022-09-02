@@ -11,7 +11,9 @@ import java.util.List;
 @Service
 public interface ProblemeService {
     //List<Probleme> lister(String mot_cle);
+
     String creer(Probleme probleme, Long idprobleme);
+
     Probleme modifier(Probleme probleme, Long idprobleme);
     String supprimer(Long idprobleme);
 

@@ -23,11 +23,15 @@ public class SolutionController {
     ProblemeService problemeService;
     @ApiOperation(value = "Donner une solution")
     @PostMapping("/add/{idprobleme}")
-    Solution add(@RequestBody Solution solution,@PathVariable Long idprobleme){
+    Object add(@RequestBody Solution solution,@PathVariable Long idprobleme){
         Probleme probleme=problemeService.trouverProblemeParId(idprobleme);
-        Solution s=solutionService.creerSolutionByProblem(solution,probleme);
+        if(probleme.getSolution()==null){
+            Solution s=solutionService.creerSolutionByProblem(solution,probleme);
+            return s;
+        }else {
+            return "Ce probleme a déja une solution";
+        }
 
-        return s;
     }
     @GetMapping(value = "/displaySolution/{idprobleme}")
     Solution display(@PathVariable Long idprobleme){

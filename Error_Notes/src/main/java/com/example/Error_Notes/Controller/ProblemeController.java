@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 
 @Api(value = "hello", description = "Methodes Problemes")
-
+@RequestMapping("/probleme")
 public class ProblemeController {
     @Autowired
     ProblemeService problemeService;
@@ -27,14 +27,14 @@ public class ProblemeController {
 //        return problemeService.recherche(mot_cle);
 //    }
 
-//    @ApiOperation(value = "Ajouter un Probleme ")
-//    @PostMapping("/add")
-//    public String add(@RequestBody Probleme probleme,Long id_probleme){
-//        if(this.problemeService.creer(probleme,id_probleme)==null){
-//            return "cet probleme existe deja";
-//        }
-//        return "probleme ajouté";
-//    }
+    @ApiOperation(value = "Ajouter un Probleme ")
+    @PostMapping("/add")
+    public String add(@RequestBody Probleme probleme,Long id_probleme){
+        if(this.problemeService.creer(probleme,id_probleme)==null){
+            return "cet probleme existe deja";
+        }
+        return "probleme ajouté";
+    }
 
     @ApiOperation(value = "Modifier un probleme ")
     @PutMapping("/updatep/{idprobleme}")
